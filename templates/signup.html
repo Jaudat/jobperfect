@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head><title>WIKI SIGNUP</title></head>
+    <body>
+        <form method="post">
+            <label>Email (optional):
+                <input name="email" type="text" value="{{em}}">
+                {{eerror}}
+            </label>
+            <br>
+            <br>
+            <label>Password:
+                <input name="password" type="password">
+                {{perror}}
+            </label>
+            <br>
+            <label>Verify Password:
+                <input name="verify" type="password">
+                {{verror}}
+            </label>
+            <br>
+            <br>
+            <input type="submit">
+        </form>
+    </body>
+</html>
