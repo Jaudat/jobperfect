@@ -4,54 +4,59 @@
     <title></title>
 </head>
 <body>
-    <table border="0">
-        <tr>
-            <td><h2>Name:</h2></td>
-            <td>
-                <label>First Name:</label> <input type="text" name="fname" value="{{ frstNme }}">
-                 <label>Last Name:</label> <input type="text" name="lname" value="{{ lstNme }}">
-            </td>
-        </tr>
-        <tr>
-            <td> <h2>Employment History:</h2> </td>
-            <td>
-                <label>Years:</label>
-                <input type="text" name="emp_yr" value="{{ job_yr }}"></label>
-                <input type="text" name="emp_yr" value="{{ job_yr }}">
-                <br>
-                <label>Job Title:</label> <input type="text" name="emp_tle" value="{{ job_tl }}">
-                <br>
-                <label>Company Name:</label> <input type="text" name="comp_name" value="{{ work_name }}">
-                <br>
-                <label>City:</label><input type="text" name="city" value="{{ work_city }}">
-                <label>Province:</label><input type="text" name="prov" value="{{ work_prov }}">
-                <label>Country:</label><input type="text" name="nation" value="{{ work_nation }}">
-            </td>
-        </tr>
-        <tr>
-            <td><h2>Projects</h2> </td>
-            <td>
-                <label>Name:</label> <input type="text" name="proj_name" value="{{ proj_name }}">
-                <br>
-                <label>Description:</label>
-                <textarea name="proj_para">{{ proj_para }}</textarea>
-                <br>
-                <label>Link(if any):</label> <!-- Link to the project-->
-                <input type="text" name="proj_link" value="{{ proj_link }}">
-                <br>
-                <!-- TODO Insert quote input here -->
-            </td>
-        </tr>
-        <tr>
-            <td><h2>Skills & Expertise</h2></td>
-            <td>
-                <label>Skill Set:</label> <!-- e.g. Linux, Professional etc.-->
-                <input type="text" name="skill_name" value="{{ skill_name }}">
-                <br>
-                <label>Skill Description:</label>
-                <textarea name="skill_bps">{{ skill_bps }}</textarea> <!-- In Bullet Points (BP)-->
-            </td>
-        </tr>
-    </table>
+    <form method="post">
+        <table border="0">
+            <tr>
+                <td><h2>Name:</h2></td>
+                <td>
+                    <label>First Name:</label> <input type="text" name="fname" value="{{ frstNme }}">
+                     <label>Last Name:</label> <input type="text" name="lname" value="{{ lstNme }}">
+                </td>
+            </tr>
+            <tr>
+                <td> <h2>Employment History:</h2> </td>
+                <td>
+                    <label>Years (example input format- November 1999):</label>
+                    <input type="text" name="start_yr" value="{{ frst_yr }}"></label>
+                    <input type="text" name="end_yr" value="{{ end_yr }}">
+                    <br>
+                    <label>Job Title:</label> <input type="text" name="emp_tle" value="{{ job_tl }}">
+                    <br>
+                    <label>Company Name:</label> <input type="text" name="comp_name" value="{{ work_name }}">
+                    <br>
+                    <label>City:</label><input type="text" name="comp_city" value="{{ work_city }}">
+                    <label>Province:</label><input type="text" name="comp_prov" value="{{ work_prov }}">
+                    <label>Country:</label><input type="text" name="comp_nation" value="{{ work_nation }}">
+                </td>
+            </tr>
+            <tr>
+                <td><h2>Projects</h2> </td>
+                <td>
+                    <label>Name:</label> <input type="text" name="proj_name" value="{{ proj_name }}">
+                    <br>
+                    <label>Description:</label>
+                    <textarea name="proj_para">{{ proj_para }}</textarea>
+                    <br>
+                    <label>Link(if any):</label> <!-- Link to the project-->
+                    <input type="text" name="proj_link" value="{{ proj_link }}">
+                    <br>
+                    <!-- TODO Insert quote field here -->
+                </td>
+            </tr>
+            <tr>
+                <td><h2>Skills & Expertise</h2></td>
+                <td>
+                    <label>Skill Set:</label> <!-- e.g. Linux, Professional etc.-->
+                    <input type="text" name="skill_name" value="{{ skill_name }}">
+                    <br>
+                    <label>Skill Description:</label>
+                    <textarea name="skill_bps">{{ skill_bps }}</textarea> <!-- In Bullet Points (BP)-->
+                </td>
+            </tr>
+            <tr>
+                <input type="submit" name="profile-edit-button" >
+            </tr>
+        </table>
+    </form>
 </body>
 </html>

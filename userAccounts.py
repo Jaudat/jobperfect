@@ -17,26 +17,28 @@ def signup():
         pazz = request.form['password']
         veri = request.form['verify']
         # If password and verify fields match then create new BSON Document
-        if pazz == veri:
-            pazz = generate_password_hash(pazz)
-            new = Profile(email=emailz, password=pazz)
-            #checks if email address is not in use
-            try:
-                Profile.objects.get(email=emailz)
-            # If the email address isn't taken
-            except DoesNotExist:
-                #Checks if email address is the right format
+        if len(pazz) > 6:
+            if pazz == veri:
+                pazz = generate_password_hash(pazz)
+                new = Profile(email=emailz, password=pazz)
+                #checks if email address is not in use
                 try:
-                    new.save()
-                # if email address not in right format
-                except (ValidationError, MultipleObjectsReturned):
-                    return render_template('signup.html', eerror="Email is of incorrect format", verror="", perror="")
-                else:
-                    session['email'] = emailz
-                    flash('You were logged in')
-                    return redirect(url_for('.welcome'))
-            else: return render_template('signup.html', verror="", eerror="Email Address is already Taken", perror="")
-        else: return render_template('signup.html', verror="Passwords do not match", eerror="", perror="")
+                    Profile.objects.get(email=emailz)
+                # If the email address isn't taken
+                except DoesNotExist:
+                    #Checks if email address is the right format
+                    try:
+                        new.save()
+                    # if email address not in right format
+                    except (ValidationError, MultipleObjectsReturned):
+                        return render_template('signup.html', eerror="Email is of incorrect format", verror="", perror="")
+                    else:
+                        session['email'] = emailz
+                        flash('You were logged in')
+                        return redirect(url_for('.welcome'))
+                else: return render_template('signup.html', verror="", eerror="Email Address is already Taken", perror="")
+            else: return render_template('signup.html', verror="Passwords do not match", eerror="", perror="", em=emailz)
+        else: return render_template('signup.html', verror="", eerror="", perror="Password has to be at least 6 characters long", em=emailz)
     else: return render_template('signup.html', verror="",perror="",eerror="")
 
 
@@ -52,10 +54,10 @@ def login():
         pazz = request.form["html_password"]
         try:
             p = Profile.objects.get(email=emailz)
+        except ValidationError:
+                    return render_template("login.html", invalid="Email is of wrong format")
         except (DoesNotExist, MultipleObjectsReturned):
             return render_template("login.html", invalid="Email is not registered with us")
-        except ValidationError:
-            return render_template("login.html", invalid="Email is of wrong format")
         else:
             if check_password_hash(p.password, pazz):
                 session['email'] = emailz
