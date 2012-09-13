@@ -2,7 +2,7 @@ __author__ = 'cevdet'
 
 from flask import Blueprint, request, render_template, session, redirect, url_for, current_app
 from model import Profile, JobHistory, PastProject, Skillcase
-from flask.ext.mongoengine import DoesNotExist, MultipleObjectsReturned
+from flask.ext.mongoengine import DoesNotExist, MultipleObjectsReturned, ValidationError
 from time import strftime, strptime
 
 
@@ -36,30 +36,41 @@ def editProfile():
                 pname = request.form["proj_name"]
                 pdescription = request.form["proj_para"]
                 plink = request.form["proj_link"]
+                # TODO pquote is not here, need to implement....
                 sgroup = request.form["skill_name"]
                 sbullet = request.form["skill_bps"]
 
-                query = Profile.objects.get(email=emailz)
-                query.first_name = fname
-                query.last_name = lname
-                query.save()
-                #query.job_histories
-                #jh = JobHistory(stime=strptime(stime, "%B %Y"),ftime=strptime(etime, "%B %Y"), title=title, company=cname
-                #, city=ccity, prov=cprov, country=cnation)
-                #query.job_histories.append(jh)
-                #query.save()
-                #query.past_projects
-                #pj = PastProject(name=pname, paragraph=pdescription, link=plink)
-                #query.past_projects.append(pj)
-                #query.save()
+                result.first_name = fname
+                result.last_name = lname
+                result.save()
+                result.job_histories
+                if stime and etime:
+                    try:
+                        jh = JobHistory(stime=strptime(stime, "%B %Y"),ftime=strptime(etime, "%B %Y"),
+                        title=title, company=cname, city=ccity, prov=cprov, country=cnation)
+                    except ValidationError:
+                        return "render the template and stime or ftime is wrong format"
+                else:
+                    jh = JobHistory(title=title, company=cname, city=ccity, prov=cprov, country=cnation)
+                result.job_histories.append(jh)
+                result.save()
+                result.past_projects
+                if plink:
+                    try:
+                        pj = PastProject(name=pname, paragraph=pdescription, link=plink)
+                    except ValidationError:
+                        return "render template and link is wrong format"
+                else:
+                    pj = PastProject(name=pname, paragraph=pdescription)
+                result.past_projects.append(pj)
+                result.save()
                 sk = Skillcase(skill=sgroup,descriptions=sbullet)
-                query.skillcases.append(sk)
-                query.save()
+                result.skillcases.append(sk)
+                result.save()
                 return redirect(url_for('.showPost'))
             else:
                 current_app.logger.debug("Method is GET")
-                hist = result.job_histories[0]
-                return render_template('editProfiles.html', job_tl=hist.title, work_name=hist.company)
+                return render_template('editProfiles.html', results=result)
     else: return "You are not logged in"
 
             # List of jinja2 variables in editProfiles.html
