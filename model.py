@@ -14,30 +14,30 @@ class Profile(db.Document):
     last_name = db.StringField(max_length=50)
     #display_pic = ...
 
-    job_histories = db.ListField(db.EmbeddedDocumentField(JobHistory))
-    past_projects = db.ListField(db.EmbeddedDocumentField(PastProject))
-    skillcases = db.ListField(db.EmbeddedDocumentField(Skillcase))
+    job_histories = db.ListField(db.EmbeddedDocumentField('JobHistory'))
+    past_projects = db.ListField(db.EmbeddedDocumentField('PastProject'))
+    skillcases = db.ListField(db.EmbeddedDocumentField('Skillcase'))
 
 
-class JobHistory(db.EmbeddedDocuments): # Experience or Employment History
+class JobHistory(db.EmbeddedDocument): # Experience or Employment History
     stime = db.DateTimeField()
     ftime = db.DateTimeField()
     title = db.StringField()
     company = db.StringField()
-    city = db.Stringfield()
-    prov = db.Stringfield()
-    country = db.Stringfield()
+    city = db.StringField()
+    prov = db.StringField()
+    country = db.StringField()
 
-class PastProject(db.EmbeddedDocuments):
-    name = db.Stringfield()
-    paragraph = db.TextField()
+class PastProject(db.EmbeddedDocument):
+    name = db.StringField()
+    paragraph = db.StringField()
     link = db.URLField()
-    quote = db.ListField(db.TextField()) # List containing person whe qoted and
+    quote = db.ListField(db.StringField()) # List containing person whe qoted and
                                          # quote that validates what is being said
 
-class Skillcase(db.EmbeddedDocuments): # Skills and Expertise
+class Skillcase(db.EmbeddedDocument): # Skills and Expertise
     skill = db.StringField()
-    descriptions = db.Listfield(db.TextField())
+    descriptions = db.ListField(db.StringField())
 
 #####################################################################################
 #           TODO Add rest Afterwords to Profile
@@ -46,16 +46,16 @@ class Skillcase(db.EmbeddedDocuments): # Skills and Expertise
 class FormalEdu(db.EmbeddedDocument):
     pass
 
-class RelevantCourse(db.EmbeddedDocuments):
+class RelevantCourse(db.EmbeddedDocument):
     pass
 
-class EventAttendance(db.EmbeddedDocuments): # Conferences etc.
+class EventAttendance(db.EmbeddedDocument): # Conferences etc.
     pass
 
-class JoinedAssociation(db.EmbeddedDocuments):
+class JoinedAssociation(db.EmbeddedDocument):
     pass
 
-class PeerRecommendation(db.EmbeddedDocuments):
+class PeerRecommendation(db.EmbeddedDocument):
     pass
 
 # TODO Add Account Settings into Profile database

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}" />
+<head>
+    <title>WIKI LOGIN</title>
+
+</head>
+<body>
+
+     <div id="main">
+        <div class="edit_form">
+
+            <form method="post">
+                <table border="0" class="login_table">
+                    <tr>
+                        <td>Email:</td>
+                        <td><input class="login_username_input" name="html_email" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>Password:</td>
+                        <td><input class="login_password_input" name="html_password" type="password"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="login_error" style="color:#ff0000;">{{invalid}}</label></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit"></td>
+                    </tr>
+                </table>
+            </form>
+         </div>
+
+     </div>
+</body>
+</html>
