@@ -56,7 +56,7 @@ def login():
             if check_password_hash(p.password, pazz):
                 session['email'] = emailz
                 flash('You were logged in')
-                return redirect('/myProfile/')
+                return redirect('/myProfile/%s' % p.vanity)
             else: render_template("login.html", invalid="Wrong Password")
     return render_template("login.html", invalid="")
 
@@ -65,5 +65,3 @@ def login():
 def logout():
     session.pop('email', None)
     return "You are logged out"
-
-
