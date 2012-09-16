@@ -20,7 +20,7 @@ def signup():
         if len(pazz) > 6:
             if pazz == veri:
                 pazz = generate_password_hash(pazz)
-                new = Profile(email=emailz, password=pazz)
+                new = Profile(email=emailz, password=pazz, vanity=emailz)
                 #checks if email address is not in use
                 try:
                     Profile.objects.get(email=emailz)

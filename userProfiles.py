@@ -35,7 +35,7 @@ def newJH():
                        jh = JobHistory(title=title, company=cname, city=ccity, prov=cprov, country=cnation)
                    result.job_histories.append(jh)
                    result.save()
-                   return redirect(url_for('.showProfile'))
+                   return redirect(url_for('.editProfile'))
                else:
                    return render_template('newJHs.html', results=result)
     else: return "You are not logged in"
