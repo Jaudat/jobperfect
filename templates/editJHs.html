@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <h2> Edit Job History</h2>
+    <form method="post">
+        <label>Years (example input format- November 1999):</label>
+        <input type="text" name="start_yr" value=" {{ jh.stime }}">
+        <input type="text" name="end_yr" value="{{ jh.endtime }}">
+        <br>
+        <label>Job Title:</label> <input type="text" name="emp_tle" value="{{ jh.title }}">
+        <br>
+        <label>Company Name:</label> <input type="text" name="comp_name" value="{{ jh.company }}">
+        <br>
+        <label>City:</label><input type="text" name="comp_city" value="{{ jh.city }}">
+        <label>Province:</label><input type="text" name="comp_prov" value="{{ jh.prov }}">
+        <label>Country:</label><input type="text" name="comp_nation" value="{{ jh.country }}">
+        <br><br>
+        <input type="submit" name="JH-edit-button">
+    </form>
+</body>
+</html>

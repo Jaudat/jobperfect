@@ -35,17 +35,11 @@ def signup():
                     else:
                         session['email'] = emailz
                         flash('You were logged in')
-                        return redirect(url_for('.welcome'))
+                        return redirect('/MyAccount/')
                 else: return render_template('signup.html', verror="", eerror="Email Address is already Taken", perror="")
             else: return render_template('signup.html', verror="Passwords do not match", eerror="", perror="", em=emailz)
         else: return render_template('signup.html', verror="", eerror="", perror="Password has to be at least 6 characters long", em=emailz)
     else: return render_template('signup.html', verror="",perror="",eerror="")
-
-
-@userA.route("/welcome/")
-def welcome():
-    return " Welcome %s" % escape(session["email"])
-
 
 @userA.route('/login/', methods=['GET', 'POST'])
 def login():
@@ -62,7 +56,7 @@ def login():
             if check_password_hash(p.password, pazz):
                 session['email'] = emailz
                 flash('You were logged in')
-                return redirect(url_for('.welcome'))
+                return redirect('/myProfile/')
             else: render_template("login.html", invalid="Wrong Password")
     return render_template("login.html", invalid="")
 
