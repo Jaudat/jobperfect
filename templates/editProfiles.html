@@ -9,8 +9,8 @@
         <tr>
             <td><h2>Name:</h2></td>
             <td>
-                <label>First Name:</label> <input type="text" name="fname" value="{{ results.first_name }}">
-                <label>Last Name:</label> <input type="text" name="lname" value="{{ results.last_name }}">
+                <label style="color: purple;">First Name:</label> <label name="fname"> {{ results.first_name }} </label>
+                <label style="color: purple;">Last Name:</label> <label name="lname"> {{ results.last_name }} </label>
                 <br><br>
                 <hr>
             </td>
@@ -19,31 +19,21 @@
             <td> <h2>Employment History:</h2> </td>
             <td>
                 {% for jh in results.job_histories %}
-                    <label>Years (example input format- November 1999):</label>
-                    <input type="text" name="start_yr" value="{{ jh.stime }}">
-                    <input type="text" name="end_yr" value="{{ jh.endtime }}">
+                    <a href="/editjh/?title={{ jh.title }}&company={{ jh.company }}">Edit</a><br>
+                    <label style="color: purple;">Years (example input format- November 1999):</label><br>
+                    <label name="start_yr">{{ jh.stime }}</label>
+                    <label name="end_yr" > {{ jh.endtime }} </label>
                     <br>
-                    <label>Job Title:</label> <input type="text" name="emp_tle" value="{{ jh.title }}">
+                    <label style="color: purple;">Job Title:</label><br>  <label name="emp_tle"> {{ jh.title }} </label>
                     <br>
-                    <label>Company Name:</label> <input type="text" name="comp_name" value="{{ jh.company }}">
+                    <label style="color: purple;">Company Name:</label><br>  <label name="comp_name"> {{ jh.company }} </label>
                     <br>
-                    <label>City:</label><input type="text" name="comp_city" value="{{ jh.city }}">
-                    <label>Province:</label><input type="text" name="comp_prov" value="{{ jh.prov }}">
-                    <label>Country:</label><input type="text" name="comp_nation" value="{{ jh.country }}">
+                    <label style="color: purple;">City:</label><br> <label name="comp_city"> {{ jh.city }} </label> <br>
+                    <label style="color: purple;">Province:</label><br> <label name="comp_prov"> {{ jh.prov }} </label> <br>
+                    <label style="color: purple;">Country:</label><br> <label name="comp_nation"> {{ jh.country }} </label>
                     <br><br>
                 {% endfor %}
-                <label>Years (example input format- November 1999):</label>
-
-                <input type="text" name="start_yr" value="">
-                <input type="text" name="end_yr" value="">
-                <br>
-                <label>Job Title:</label> <input type="text" name="emp_tle" value="">
-                <br>
-                <label>Company Name:</label> <input type="text" name="comp_name" value="">
-                <br>
-                <label>City:</label><input type="text" name="comp_city" value="">
-                <label>Province:</label><input type="text" name="comp_prov" value="">
-                <label>Country:</label><input type="text" name="comp_nation" value="">
+                <a href="/newjh/">Add Job History</a>
                 <br><br>
                 <hr>
             </td>
@@ -53,27 +43,19 @@
             <td><h2>Projects</h2> </td>
             <td>
                 {% for pp in results.past_projects %}
-                    <label>Name:</label> <input type="text" name="proj_name" value="{{ pp.name }}">
+                    <a href="/editpp/?title={{ pp.name }}&para={{ pp.paragraph }}">Edit</a><br>
+                    <label style="color: purple;">Name:</label> <br> <label name="proj_name"> {{ pp.name }} </label>
                     <br>
-                    <label>Description:</label>
-                    <textarea name="proj_para">{{ pp.paragraph }}</textarea>
+                    <label style="color: purple;">Description:</label> <br>
+                    <label name="proj_para">{{ pp.paragraph }}</label>
                     <br>
-                    <label>Link(if any):</label> <!-- Link to the project-->
-                    <input type="text" name="proj_link" value="{{ pp.link }}">
+                    <label style="color: purple;">Link(if any):</label> <!-- Link to the project-->
+                    <br> <label name="proj_link"> {{ pp.link }} </label>
                     <br>
                     <!-- TODO Insert quote field here -->
                     <br><br>
                 {% endfor %}
-                <label>Name:</label> <input type="text" name="proj_name" value="">
-                <br>
-                <label>Description:</label>
-                <textarea name="proj_para"></textarea>
-                <br>
-                <label>Link(if any):</label> <!-- Link to the project-->
-                <input type="text" name="proj_link" value="">
-                <br>
-                <!-- TODO Insert quote field here -->
-                <br><br>
+                <a href="/newpp">Add Project</a>
                 <hr>
             </td>
         </tr>
@@ -81,24 +63,17 @@
             <td><h2>Skills & Expertise</h2></td>
             <td>
                 {% for se in results.skillcases %}
-                    <label>Skill Set:</label> <!-- e.g. Linux, Professional etc.-->
-                    <input type="text" name="skill_name" value="{{ se.skill }}">
+                    <a href="/editse/?skill={{ se.skill }}&para={{ se.description }}">Edit</a><br>
+                    <label style="color: purple;">Skill Set: </label> <br> <!-- e.g. Linux, Professional etc.-->
+                    <label name="skill_name" > {{ se.skill }} </label>
                     <br>
-                    <label>Skill Description:</label>
-                    <textarea name="skill_bps">{{ se.descriptions }}</textarea> <!-- In Bullet Points (BP)-->
+                    <label style="color: purple;">Skill Description:</label> <br>
+                    <label name="skill_bps"> {{ se.descriptions }} </label> <!-- In Bullet Points (BP)-->
                     <br><br>
                 {% endfor %}
-                <label>Skill Set:</label> <!-- e.g. Linux, Professional etc.-->
-                <input type="text" name="skill_name" value="">
-                <br>
-                <label>Skill Description:</label>
-                <textarea name="skill_bps"></textarea> <!-- In Bullet Points (BP)-->
-                <br><br>
+                <a href="/newse/">Add Skill or Expertise</a>
                 <hr>
             </td>
-        </tr>
-        <tr>
-            <input type="submit" name="profile-edit-button">
         </tr>
     </table>
     </form>
