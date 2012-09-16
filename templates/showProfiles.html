@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <form method="post">
+    <table border="0">
+        <tr>
+            <td><a href="/edit/">Edit this Page</a><br></td>
+        </tr>
+        <tr>
+            <td><h2>Name:</h2></td>
+            <td>
+                <label style="color: purple;">First Name:</label> <label name="fname"> {{ results.first_name }} </label>
+                <label style="color: purple;">Last Name:</label> <label name="lname"> {{ results.last_name }} </label>
+                <br><br>
+                <hr>
+            </td>
+        </tr>
+        <tr>
+            <td> <h2>Employment History:</h2> </td>
+            <td>
+                {% for jh in results.job_histories %}
+
+                    <label style="color: purple;">Years (example input format- November 1999):</label><br>
+                    <label name="start_yr">{{ jh.stime }}</label>
+                    <label name="end_yr" > {{ jh.endtime }} </label>
+                    <br>
+                    <label style="color: purple;">Job Title:</label><br>  <label name="emp_tle"> {{ jh.title }} </label>
+                    <br>
+                    <label style="color: purple;">Company Name:</label><br>  <label name="comp_name"> {{ jh.company }} </label>
+                    <br>
+                    <label style="color: purple;">City:</label><br> <label name="comp_city"> {{ jh.city }} </label> <br>
+                    <label style="color: purple;">Province:</label><br> <label name="comp_prov"> {{ jh.prov }} </label> <br>
+                    <label style="color: purple;">Country:</label><br> <label name="comp_nation"> {{ jh.country }} </label>
+                    <br><br>
+                {% endfor %}
+                <br><br>
+                <hr>
+            </td>
+        </tr>
+    <hr>
+        <tr>
+            <td><h2>Projects</h2> </td>
+            <td>
+                {% for pp in results.past_projects %}
+                    <label style="color: purple;">Name:</label> <br> <label name="proj_name"> {{ pp.name }} </label>
+                    <br>
+                    <label style="color: purple;">Description:</label> <br>
+                    <label name="proj_para">{{ pp.paragraph }}</label>
+                    <br>
+                    <label style="color: purple;">Link(if any):</label> <!-- Link to the project-->
+                    <br> <label name="proj_link"> {{ pp.link }} </label>
+                    <br>
+                    <!-- TODO Insert quote field here -->
+                    <br><br>
+                {% endfor %}
+                <hr>
+            </td>
+        </tr>
+        <tr>
+            <td><h2>Skills & Expertise</h2></td>
+            <td>
+                {% for se in results.skillcases %}
+                    <label style="color: purple;">Skill Set: </label> <br> <!-- e.g. Linux, Professional etc.-->
+                    <label name="skill_name" > {{ se.skill }} </label>
+                    <br>
+                    <label style="color: purple;">Skill Description:</label> <br>
+                    <label name="skill_bps"> {{ se.descriptions }} </label> <!-- In Bullet Points (BP)-->
+                    <br><br>
+                {% endfor %}
+                <hr>
+            </td>
+        </tr>
+        <!-- <tr>
+            <input type="submit" name="profile-edit-button">
+        </tr> -->
+    </table>
+    </form>
+</body>
+</html>
