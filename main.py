@@ -4,7 +4,6 @@ __author__ = 'cevdet'
 from config import app
 from userAccounts import userA
 from userProfiles import userP
-from flask import url_for
 
 
 app.register_blueprint(userA)

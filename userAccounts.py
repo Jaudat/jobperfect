@@ -1,9 +1,9 @@
 __author__ = 'cevdet'
 
-from flask import Blueprint, render_template, request, redirect, url_for, session, flash, escape
+from flask import Blueprint, render_template, request, redirect, session, flash
 from flask.ext.bcrypt import generate_password_hash,check_password_hash
 from flask.ext.mongoengine import ValidationError, DoesNotExist, MultipleObjectsReturned
-from model import Profile
+from models.employee import Profile
 
 
 

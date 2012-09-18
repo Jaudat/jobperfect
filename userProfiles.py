@@ -1,9 +1,9 @@
 __author__ = 'cevdet'
 
 from flask import Blueprint, request, render_template, session, redirect, url_for
-from model import Profile, JobHistory, PastProject, Skillcase
+from models.employee import Profile, JobHistory, PastProject, Skillcase
 from flask.ext.mongoengine import DoesNotExist, MultipleObjectsReturned
-from time import strftime, strptime
+from time import  strptime
 
 
 userP = Blueprint('userProfiles', __name__,
@@ -123,7 +123,9 @@ def showProfile(vanity):
             if result.email == emailz:
                     return render_template('showProfiles.html', results=result)
             else: return "You are not logged in"
-        else: return render_template('anonProfiles.html', results=result)
+        else:
+            #return redirect(url_for('userA.login'))
+            return render_template('anonProfiles.html', results=result)
 
 
 @userP.route('/______auto-build_______/', methods=['GET'])
