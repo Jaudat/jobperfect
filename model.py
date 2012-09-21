@@ -2,10 +2,11 @@ __author__ = 'cevdet'
 
 import datetime
 from config import db
+from flask_mongoengine import *
 
 
 class Profile(db.Document):
-    username = db.StringField(required=False, unique=False, max_length=50) # this is not used and will be deprecated if possible
+    vanity = db.StringField(required=False, unique=False, max_length=50) # this is not used and will be deprecated if possible
     email = db.EmailField(unique=True, required=True)
     password = db.StringField(required=True)
     created_on = db.DateTimeField(default=datetime.datetime.now, required=True)
@@ -33,11 +34,15 @@ class PastProject(db.EmbeddedDocument):
     paragraph = db.StringField()
     link = db.URLField()
     quote = db.ListField(db.StringField()) # List containing person whe qoted and
+    quote = db.StringField()            # List containing person whe qoted and
+
                                          # quote that validates what is being said
 
 class Skillcase(db.EmbeddedDocument): # Skills and Expertise
     skill = db.StringField()
+
     descriptions = db.ListField(db.StringField())
+    descriptions = db.StringField()
 
 #####################################################################################
 #           TODO Add rest Afterwords to Profile

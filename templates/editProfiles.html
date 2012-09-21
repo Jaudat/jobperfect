@@ -4,54 +4,103 @@
     <title></title>
 </head>
 <body>
+    <form method="post">
     <table border="0">
         <tr>
             <td><h2>Name:</h2></td>
             <td>
-                <label>First Name:</label> <input type="text" name="fname" value="{{ frstNme }}">
-                 <label>Last Name:</label> <input type="text" name="lname" value="{{ lstNme }}">
+                <label>First Name:</label> <input type="text" name="fname" value="{{ results.first_name }}">
+                <label>Last Name:</label> <input type="text" name="lname" value="{{ results.last_name }}">
+                <br><br>
+                <hr>
             </td>
         </tr>
         <tr>
             <td> <h2>Employment History:</h2> </td>
             <td>
-                <label>Years:</label>
-                <input type="text" name="emp_yr" value="{{ job_yr }}"></label>
-                <input type="text" name="emp_yr" value="{{ job_yr }}">
+                {% for jh in results.job_histories %}
+                    <label>Years (example input format- November 1999):</label>
+                    <input type="text" name="start_yr" value="{{ jh.stime }}">
+                    <input type="text" name="end_yr" value="{{ jh.endtime }}">
+                    <br>
+                    <label>Job Title:</label> <input type="text" name="emp_tle" value="{{ jh.title }}">
+                    <br>
+                    <label>Company Name:</label> <input type="text" name="comp_name" value="{{ jh.company }}">
+                    <br>
+                    <label>City:</label><input type="text" name="comp_city" value="{{ jh.city }}">
+                    <label>Province:</label><input type="text" name="comp_prov" value="{{ jh.prov }}">
+                    <label>Country:</label><input type="text" name="comp_nation" value="{{ jh.country }}">
+                    <br><br>
+                {% endfor %}
+                <label>Years (example input format- November 1999):</label>
+
+                <input type="text" name="start_yr" value="">
+                <input type="text" name="end_yr" value="">
                 <br>
-                <label>Job Title:</label> <input type="text" name="emp_tle" value="{{ job_tl }}">
+                <label>Job Title:</label> <input type="text" name="emp_tle" value="">
                 <br>
-                <label>Company Name:</label> <input type="text" name="comp_name" value="{{ work_name }}">
+                <label>Company Name:</label> <input type="text" name="comp_name" value="">
                 <br>
-                <label>City:</label><input type="text" name="city" value="{{ work_city }}">
-                <label>Province:</label><input type="text" name="prov" value="{{ work_prov }}">
-                <label>Country:</label><input type="text" name="nation" value="{{ work_nation }}">
+                <label>City:</label><input type="text" name="comp_city" value="">
+                <label>Province:</label><input type="text" name="comp_prov" value="">
+                <label>Country:</label><input type="text" name="comp_nation" value="">
+                <br><br>
+                <hr>
             </td>
         </tr>
+    <hr>
         <tr>
             <td><h2>Projects</h2> </td>
             <td>
-                <label>Name:</label> <input type="text" name="proj_name" value="{{ proj_name }}">
+                {% for pp in results.past_projects %}
+                    <label>Name:</label> <input type="text" name="proj_name" value="{{ pp.name }}">
+                    <br>
+                    <label>Description:</label>
+                    <textarea name="proj_para">{{ pp.paragraph }}</textarea>
+                    <br>
+                    <label>Link(if any):</label> <!-- Link to the project-->
+                    <input type="text" name="proj_link" value="{{ pp.link }}">
+                    <br>
+                    <!-- TODO Insert quote field here -->
+                    <br><br>
+                {% endfor %}
+                <label>Name:</label> <input type="text" name="proj_name" value="">
                 <br>
                 <label>Description:</label>
-                <textarea name="proj_para">{{ proj_para }}</textarea>
+                <textarea name="proj_para"></textarea>
                 <br>
                 <label>Link(if any):</label> <!-- Link to the project-->
-                <input type="text" name="proj_link" value="{{ proj_link }}">
+                <input type="text" name="proj_link" value="">
                 <br>
-                <!-- TODO Insert quote input here -->
+                <!-- TODO Insert quote field here -->
+                <br><br>
+                <hr>
             </td>
         </tr>
         <tr>
             <td><h2>Skills & Expertise</h2></td>
             <td>
+                {% for se in results.skillcases %}
+                    <label>Skill Set:</label> <!-- e.g. Linux, Professional etc.-->
+                    <input type="text" name="skill_name" value="{{ se.skill }}">
+                    <br>
+                    <label>Skill Description:</label>
+                    <textarea name="skill_bps">{{ se.descriptions }}</textarea> <!-- In Bullet Points (BP)-->
+                    <br><br>
+                {% endfor %}
                 <label>Skill Set:</label> <!-- e.g. Linux, Professional etc.-->
-                <input type="text" name="skill_name" value="{{ skill_name }}">
+                <input type="text" name="skill_name" value="">
                 <br>
                 <label>Skill Description:</label>
-                <textarea name="skill_bps">{{ skill_bps }}</textarea> <!-- In Bullet Points (BP)-->
+                <textarea name="skill_bps"></textarea> <!-- In Bullet Points (BP)-->
+                <br><br>
+                <hr>
             </td>
         </tr>
+        <tr>
+            <input type="submit" name="profile-edit-button">
+        </tr>
     </table>
+    </form>
 </body>
 </html>
