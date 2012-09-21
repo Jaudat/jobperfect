@@ -19,7 +19,7 @@
             <td> <h2>Employment History:</h2> </td>
             <td>
                 {% for jh in results.job_histories %}
-                    <a href="/editjh/?title={{ jh.title }}&company={{ jh.company }}">Edit</a><br>
+
                     <label style="color: purple;">Years (example input format- November 1999):</label><br>
                     <label name="start_yr">{{ jh.stime }}</label>
                     <label name="end_yr" > {{ jh.endtime }} </label>
@@ -33,7 +33,6 @@
                     <label style="color: purple;">Country:</label><br> <label name="comp_nation"> {{ jh.country }} </label>
                     <br><br>
                 {% endfor %}
-                <a href="/newjh/">Add Job History</a>
                 <br><br>
                 <hr>
             </td>
@@ -43,7 +42,6 @@
             <td><h2>Projects</h2> </td>
             <td>
                 {% for pp in results.past_projects %}
-                    <a href="/editpp/?title={{ pp.name }}&para={{ pp.paragraph }}">Edit</a><br>
                     <label style="color: purple;">Name:</label> <br> <label name="proj_name"> {{ pp.name }} </label>
                     <br>
                     <label style="color: purple;">Description:</label> <br>
@@ -55,7 +53,6 @@
                     <!-- TODO Insert quote field here -->
                     <br><br>
                 {% endfor %}
-                <a href="/newpp">Add Project</a>
                 <hr>
             </td>
         </tr>
@@ -63,7 +60,6 @@
             <td><h2>Skills & Expertise</h2></td>
             <td>
                 {% for se in results.skillcases %}
-                    <a href="/editse/?skill={{ se.skill }}&para={{ se.description }}">Edit</a><br>
                     <label style="color: purple;">Skill Set: </label> <br> <!-- e.g. Linux, Professional etc.-->
                     <label name="skill_name" > {{ se.skill }} </label>
                     <br>
@@ -71,11 +67,12 @@
                     <label name="skill_bps"> {{ se.descriptions }} </label> <!-- In Bullet Points (BP)-->
                     <br><br>
                 {% endfor %}
-                <a href="/newse/">Add Skill or Expertise</a>
                 <hr>
             </td>
         </tr>
-        <tr> <a href="/______auto-build_______/">My Profile</a> </tr>
+        <!-- <tr>
+            <input type="submit" name="profile-edit-button">
+        </tr> -->
     </table>
     </form>
 </body>

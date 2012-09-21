@@ -1,9 +1,9 @@
 __author__ = 'cevdet'
 
-from flask import Blueprint, render_template, request, redirect, url_for, session, flash, escape
+from flask import Blueprint, render_template, request, redirect, session, flash
 from flask.ext.bcrypt import generate_password_hash,check_password_hash
 from flask.ext.mongoengine import ValidationError, DoesNotExist, MultipleObjectsReturned
-from model import Profile
+from models.employee import Profile
 
 
 
@@ -20,7 +20,7 @@ def signup():
         if len(pazz) > 6:
             if pazz == veri:
                 pazz = generate_password_hash(pazz)
-                new = Profile(email=emailz, password=pazz)
+                new = Profile(email=emailz, password=pazz, vanity=emailz)
                 #checks if email address is not in use
                 try:
                     Profile.objects.get(email=emailz)
@@ -35,17 +35,11 @@ def signup():
                     else:
                         session['email'] = emailz
                         flash('You were logged in')
-                        return redirect(url_for('.welcome'))
+                        return redirect('/MyAccount/')
                 else: return render_template('signup.html', verror="", eerror="Email Address is already Taken", perror="")
             else: return render_template('signup.html', verror="Passwords do not match", eerror="", perror="", em=emailz)
         else: return render_template('signup.html', verror="", eerror="", perror="Password has to be at least 6 characters long", em=emailz)
     else: return render_template('signup.html', verror="",perror="",eerror="")
-
-
-@userA.route("/welcome/")
-def welcome():
-    return " Welcome %s" % escape(session["email"])
-
 
 @userA.route('/login/', methods=['GET', 'POST'])
 def login():
@@ -62,7 +56,7 @@ def login():
             if check_password_hash(p.password, pazz):
                 session['email'] = emailz
                 flash('You were logged in')
-                return redirect(url_for('.welcome'))
+                return redirect('/myProfile/%s' % p.vanity)
             else: render_template("login.html", invalid="Wrong Password")
     return render_template("login.html", invalid="")
 
@@ -71,5 +65,3 @@ def login():
 def logout():
     session.pop('email', None)
     return "You are logged out"
-
-
